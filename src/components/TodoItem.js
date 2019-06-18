@@ -13,7 +13,7 @@ function TodoItem(props) {
                         e.nativeEvent.target.parentNode.classList.toggle('completed')
                     }}
                 />
-                <label>{props.text} {props.index}</label>
+                <label>{props.text}</label>
                 <button
                     className="destroy"
                     onClick={props.onDeleteItem}

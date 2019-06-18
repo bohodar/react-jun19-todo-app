@@ -4,17 +4,20 @@ function Footer(props) {
     return (
         <footer className="footer" style={{display: 'block'}}>
             <span className="todo-count"><strong>{props.todoItems.length}</strong> items left</span>
-            <ul className="filters">
-                <li>
-                    <a href="#/" className="selected">All</a>
-                </li>
-                <li>
-                    <a href="#/active">Active</a>
-                </li>
-                <li>
-                    <a href="#/completed">Completed</a>
-                </li>
-            </ul>
+            <form className="filters">
+                <label className="selected">
+                    All
+                    <input type="radio" name="filter" />
+                </label>
+                <label>
+                    Active
+                    <input type="radio" name="filter" />
+                </label>
+                <label>
+                    Completed
+                    <input type="radio" name="filter" />
+                </label>
+            </form>
             <button className="clear-completed"></button>
         </footer>
     )

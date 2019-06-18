@@ -282,11 +282,11 @@ button {
     left: 0;
 }
 
-.filters li {
+.filters label {
     display: inline;
 }
 
-.filters li a {
+.filters label {
     color: inherit;
     margin: 3px;
     padding: 3px 7px;
@@ -294,12 +294,20 @@ button {
     border: 1px solid transparent;
     border-radius: 3px;
 }
+.filters label input {
+    -webkit-appearance: none;
+    position: absolute;
+    clip: rect(0 0 0 0);
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+}
 
-.filters li a:hover {
+.filters label:hover {
     border-color: rgba(175, 47, 47, 0.1);
 }
 
-.filters li a.selected {
+.filters .selected {
     border-color: rgba(175, 47, 47, 0.2);
 }
 
