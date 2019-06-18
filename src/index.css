@@ -14,4 +14,10 @@ code {
 
 body {
   padding: 0 50px;
+
+}
+.completed {
+  color: #bbd;
+  text-decoration: line-through;
+  text-decoration-color: #bbf;
 }
