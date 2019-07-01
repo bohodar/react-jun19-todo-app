@@ -2,7 +2,7 @@ import React from 'react'
 
 function Footer(props) {
     return (
-        <footer className="footer" style={{display: 'block'}}>
+        <footer className="footer">
             <span className="todo-count"><strong>{props.todoItems.length}</strong> items left</span>
             <form className="filters">
                 <label className="selected">
