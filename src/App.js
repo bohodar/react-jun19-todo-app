@@ -1,61 +1,89 @@
 import React from 'react';
+import './App.css'
+import Header from './components/Header'
+import MainBody from './components/MainBody'
+import Footer from './components/Footer'
 
-function App() {
-  return (
-    <section className="todoapp">
-      <header className="header">
-        <h1>todos</h1>
+class App extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      todoItems: [],
+      userText: '',
+    }
+  };
 
-        <input
-          className="new-todo"
-          placeholder="What needs to be done?"
-          autoFocus=""
+  onTextFieldChange = (event) => {
+    const eValue = event.target.value;
+
+    this.setState({
+        userText: eValue
+      }
+    )
+  };
+  onCheckboxChange = (number) => {
+    this.setState((prevState) => {
+      const copyTodoArr = [...prevState.todoItems];
+
+      copyTodoArr[number] = {
+        ...copyTodoArr[number],
+        completed: !copyTodoArr[number].completed
+      };
+
+      return {
+        todoItems: copyTodoArr
+      }
+    })
+  };
+
+  onSubmit = (e) => {
+    e.preventDefault();
+    this.setState((prev) => {
+      return {
+        todoItems: [
+          {
+            text: prev.userText,
+            completed: false,
+            classForCompleted: null,
+            id: Date.now()
+          },
+          ...prev.todoItems
+        ],
+        userText: ''
+      }
+    });
+  };
+
+  onDeleteItem = (number) => {
+    this.setState((prev) => {
+      const copyTodo = [...prev.todoItems];
+      copyTodo.splice(number, 1);
+      return {
+        todoItems: [...copyTodo]
+      }
+    })
+  };
+
+  render() {
+    return (
+      <section className="todoapp">
+        <Header
+          todoitems={this.state.todoItems}
+          onChange={this.onTextFieldChange}
+          userText={this.state.userText}
+          onSubmit={this.onSubmit}
+          onClick={this.onClick}
         />
-      </header>
-
-      <section className="main" style={{ display: 'block' }}>
-        <input id="toggle-all" className="toggle-all" type="checkbox" />
-        <label htmlFor="toggle-all">Mark all as complete</label>
-        <ul className="todo-list">
-          <li className="">
-            <div className="view">
-              <input className="toggle" type="checkbox" />
-              <label>sdfsdfsdf</label>
-              <button className="destroy"></button>
-            </div>
-          </li>
-          <li className="">
-            <div className="view">
-              <input className="toggle" type="checkbox" />
-              <label>dsfgsdfgdsrg</label>
-              <button className="destroy"></button></div>
-          </li>
-          <li className="">
-            <div className="view">
-              <input className="toggle" type="checkbox" />
-              <label>sddfgdfgdf</label>
-              <button className="destroy"></button>
-            </div>
-          </li>
-        </ul>
+        <MainBody
+          todoItems={this.state.todoItems}
+          onChange={this.onCheckboxChange}
+          onDeleteItem={this.onDeleteItem}
+        />
+        {this.state.todoItems.length > 0 ? <Footer todoItems={this.state.todoItems}/> : null}
       </section>
-      <footer className="footer" style={{ display: 'block' }}>
-        <span className="todo-count"><strong>3</strong> items left</span>
-        <ul className="filters">
-          <li>
-            <a href="#/" className="selected">All</a>
-          </li>
-          <li>
-            <a href="#/active">Active</a>
-          </li>
-          <li>
-            <a href="#/completed">Completed</a>
-          </li>
-        </ul>
-        <button className="clear-completed" style={{ display: 'block' }}></button>
-      </footer>
-    </section>
-  );
+    )
+  }
+
 }
 
 export default App;
